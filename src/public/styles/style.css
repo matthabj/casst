@@ -1,0 +1,13 @@
+body
+{
+	margin: 1rem;
+	height: calc(100vh - 2rem);
+	background: #0c0c0c;
+}
+
+*
+{
+	color: white;
+	/* font-family: 'Finlandica', sans-serif; */
+	font-family: 'Spline Sans', sans-serif;
+}
