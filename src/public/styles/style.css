@@ -46,10 +46,13 @@ body
 {
 	font-size: 1.2rem;
 	font-weight: bold;
+	margin-bottom: 0.5rem;
 }
 
 .poll > main > .option
 {
+	display: flex;
+ 	align-items: center;
 	border-radius: 8px;
 	position: relative;
 	overflow: hidden;
@@ -90,6 +93,14 @@ body
 	background: none;
 }
 
+.poll > main > .option > .radio-icon
+{
+	position: absolute;
+	width: 1.2rem;
+	height: 1.2rem;
+	right: 0.6rem;
+}
+
 .poll > main > .meta-votes
 {
 	color: #aaa;
@@ -107,4 +118,14 @@ body
 	fill: white;
 	width: 100%;
 	height: 100%;
+}
+
+button
+{
+	background: #4434b0;
+	border: none;
+	padding: 0.4rem;
+	border-radius: 6px;
+	width: 6rem;
+	margin-top: 0.5rem;
 }
