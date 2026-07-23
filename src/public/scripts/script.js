@@ -34,10 +34,23 @@ function createPoll(metadata) {
 	const titleEl = poll.querySelector(".poll-title");
 	titleEl.innerText = metadata.title;
 
+	const optionArray = [];
 	const optionsParentEl = poll.querySelector(".poll-options");
 	optionsParentEl.innerHTML = "";
 	metadata.options.forEach(option => {
 		const optionEl = createPollOption(option.value);
+
+		optionEl.addEventListener("click", () => {
+			optionArray.forEach(currentOption => {
+				const currentRadioIcon = currentOption.querySelector("div.radio-icon");
+				const isCurrentChecked = (currentOption == optionEl);
+				const currentIconSrc = isCurrentChecked ? "assets/radio-checked.svg" : "assets/radio.svg";
+				currentRadioIcon.setAttribute("data-src", currentIconSrc);
+				loadSVGIconFor(currentRadioIcon);
+			})
+		})
+
+		optionArray.push(optionEl);
 		optionsParentEl.appendChild(optionEl);
 	});
 
@@ -56,23 +69,23 @@ const testPoll = {
 pollContainer.appendChild(createPoll(testPoll));
 
 
-
+async function loadSVGIconFor(iconEl) {
+	const src = iconEl.getAttribute('data-src');
+	const response = await fetch(src);
+	const svgContent = await response.text();
+	
+	const parser = new DOMParser();
+	const docSvg = parser.parseFromString(svgContent, 'image/svg+xml');
+	const loadedSvg = docSvg.documentElement;
+	
+	iconEl.innerHTML = loadedSvg.outerHTML;
+	iconEl.setAttribute('viewBox', loadedSvg.getAttribute('viewBox'));
+}
 
 function loadSVGIcons() {
 	const iconsArray = document.querySelectorAll("div.icon[data-src]");
 
-	iconsArray.forEach(async iconEl => {
-		const src = iconEl.getAttribute('data-src');
-		const response = await fetch(src);
-		const svgContent = await response.text();
-		
-		const parser = new DOMParser();
-		const docSvg = parser.parseFromString(svgContent, 'image/svg+xml');
-		const loadedSvg = docSvg.documentElement;
-		
-		iconEl.innerHTML = loadedSvg.outerHTML;
-		iconEl.setAttribute('viewBox', loadedSvg.getAttribute('viewBox'));
-	});
+	iconsArray.forEach(loadSVGIconFor);
 }
 
 loadSVGIcons();
