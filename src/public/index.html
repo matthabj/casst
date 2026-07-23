@@ -7,6 +7,11 @@
 
 	<link href="https://fonts.cdnfonts.com/css/finlandica" rel="stylesheet">
 	<link href="https://fonts.cdnfonts.com/css/spline-sans" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/radio-canada-2" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/kantumruy-pro" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/br-cobane" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/inclusive-sans-2" rel="stylesheet">
+	<link href="https://fonts.cdnfonts.com/css/rubik-2" rel="stylesheet">
 	<link rel="stylesheet" href="styles/style.css">
 
 	<script src="scripts/utils.js"></script>
@@ -14,34 +19,43 @@
 </head>
 <body>
 	<h1>App working</h1>
-	<div class="poll" style="margin: auto;">
-		<header>
-			<div class="icon" data-src="assets/account.svg"></div>
-			<span class="heading">Users's poll</span>
-		</header>
-		<main>
-			<span class="title">What is the best color?</span>
-			<div class="option">
-				<span class="option-percent">50%</span>
-				<span class="option-content">Blue</span>
-				<div class="icon radio-icon" data-src="assets/radio.svg"></div>
-				<span class="option-bar"></span>
-			</div>
-			<div class="option">
-				<span class="option-percent">0%</span>
-				<span class="option-content">Red</span>
-				<div class="icon radio-icon" data-src="assets/radio.svg"></div>
-				<span class="option-bar"></span>
-			</div>
-			<div class="option">
-				<span class="option-percent">50%</span>
-				<span class="option-content">Carrot</span>
-				<div class="icon radio-icon" data-src="assets/radio.svg"></div>
-				<span class="option-bar"></span>
-			</div>
-			<button>Vote</button>
-			<span class="meta-votes">2 votes</span>
-		</main>
-	</div>
+	<div id="poll-container"></div>
+
+	<!-- TEMPLATES -->
+	<template id="poll-template">
+		<div class="poll" style="margin: auto;">
+			<header>
+				<!-- <div class="icon" data-src="assets/account.svg"></div> -->
+				<span class="poll-heading">Users's poll</span>
+			</header>
+			<main>
+				<span class="poll-title">What is the best color?</span>
+				<div class="poll-options">
+					<div class="option">
+						<span class="option-percent">0%</span>
+						<span class="option-content">Blue</span>
+						<div class="icon radio-icon" data-src="assets/radio.svg"></div>
+						<span class="option-bar"></span>
+					</div>
+					<div class="option">
+						<span class="option-percent">0%</span>
+						<span class="option-content">Red</span>
+						<div class="icon radio-icon" data-src="assets/radio.svg"></div>
+						<span class="option-bar"></span>
+					</div>
+					<div class="option">
+						<span class="option-percent">0%</span>
+						<span class="option-content">Carrot</span>
+						<div class="icon radio-icon" data-src="assets/radio.svg"></div>
+						<span class="option-bar"></span>
+					</div>
+				</div>
+				<div class="footer">
+					<button>Vote</button>
+					<span class="poll-votes" style="margin-left: auto;">2 votes</span>
+				</div>
+			</main>
+		</div>
+	</template>
 </body>
 </html>

@@ -9,7 +9,12 @@ body
 {
 	color: white;
 	/* font-family: 'Finlandica', sans-serif; */
-	font-family: 'Spline Sans', sans-serif;
+	/* font-family: 'Spline Sans', sans-serif; */
+	/* font-family: 'Radio Canada', sans-serif; */
+	font-family: 'Kantumruy Pro', sans-serif;
+	/* font-family: 'BR Cobane', sans-serif; */
+	/* font-family: 'Inclusive Sans', sans-serif; */
+	/* font-family: 'Rubik', sans-serif; */
 }
 
 .poll
@@ -17,6 +22,7 @@ body
 	max-width: 30rem;
 	padding: 1rem;
 	background-color: #121212;
+	font-size: 0.9rem;
 
 	display: flex;
 	flex-direction: column;
@@ -35,21 +41,27 @@ body
 
 .poll > main
 {
-	font-size: 0.9rem;
 	padding: 0 1rem;
 	display: flex;
 	flex-direction: column;
 	gap: 0.5rem;
 }
 
-.poll > main > span.title
+.poll > main > span.poll-title
 {
 	font-size: 1.2rem;
 	font-weight: bold;
 	margin-bottom: 0.5rem;
 }
 
-.poll > main > .option
+.poll > main > .poll-options
+{
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
+}
+
+.poll > main > .poll-options > .option
 {
 	display: flex;
  	align-items: center;
@@ -61,12 +73,12 @@ body
 	background-color: #222;
 }
 
-.poll > main > .option:hover
+.poll > main > .poll-options > .option:hover
 {
 	background-color: #333;
 }
 
-.poll > main > .option > .option-percent
+.poll > main > .poll-options > .option > .option-percent
 {
 	position: absolute;
 	top: 0.5rem;
@@ -74,7 +86,7 @@ body
 	z-index: 1;
 }
 
-.poll > main > .option > .option-content
+.poll > main > .poll-options > .option > .option-content
 {
 	position: absolute;
 	top: 0.5rem;
@@ -83,7 +95,7 @@ body
 	z-index: 1;
 }
 
-.poll > main > .option > .option-bar
+.poll > main > .poll-options > .option > .option-bar
 {
 	position: absolute;
 	top: 0;
@@ -93,7 +105,7 @@ body
 	background: none;
 }
 
-.poll > main > .option > .radio-icon
+.poll > main > .poll-options > .option > .radio-icon
 {
 	position: absolute;
 	width: 1.2rem;
@@ -106,11 +118,16 @@ body
 	color: #aaa;
 }
 
+.poll > main > .footer
+{
+	display: flex;
+	margin-top: 0.5rem;
+}
 
 .icon
 {
-	width: 1.6rem;
-	height: 1.6rem;
+	width: 32px;
+	height: 32px;
 }
 
 .icon > svg
@@ -122,10 +139,9 @@ body
 
 button
 {
-	background: #4434b0;
+	background: #3442b0;
 	border: none;
 	padding: 0.4rem;
 	border-radius: 6px;
 	width: 6rem;
-	margin-top: 0.5rem;
 }
