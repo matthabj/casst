@@ -2,12 +2,15 @@ import express = require("express");
 import { Request, Response } from "express";
 import { routes } from './routes';
 import { connectRedisInBackground } from './redis';
+import path from 'path';
 
 const app = express();
 const PORT = 3000;
 
 app.use(express.json());
 app.use(express.static(__dirname + "/public"));
+app.use('/assets', express.static(path.join(__dirname, '../assets')));
+
 app.use(function(req, res, next) {
 	res.header("Access-Control-Allow-Origin", "*");
 	res.header("Access-Control-Allow-Methods", "GET, PUT, POST");
