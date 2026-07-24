@@ -16,7 +16,12 @@ function createPollOption(content) {
 	const optionRadioEl = document.createElement("div");
 	optionRadioEl.classList.add("icon");
 	optionRadioEl.classList.add("radio-icon");
-	optionRadioEl.setAttribute("data-src", "assets/radio.svg")
+	optionRadioEl.setAttribute("data-src", "assets/radio-checked.svg")
+	loadSVGIconFor(optionRadioEl, function afterRadioLoads() {
+		const optionRadioMiddle = optionRadioEl.querySelector("path.middle");
+		optionRadioMiddle.style.display = "none";
+	});
+	
 
 	optionEl.appendChild(optionPercentEl);
 	optionEl.appendChild(optionContentEl);
@@ -40,13 +45,12 @@ function createPoll(metadata) {
 	metadata.options.forEach(option => {
 		const optionEl = createPollOption(option.value);
 
-		optionEl.addEventListener("click", () => {
+		optionEl.addEventListener("click", function handleRadioSelect() {
 			optionArray.forEach(currentOption => {
 				const currentRadioIcon = currentOption.querySelector("div.radio-icon");
 				const isCurrentChecked = (currentOption == optionEl);
-				const currentIconSrc = isCurrentChecked ? "assets/radio-checked.svg" : "assets/radio.svg";
-				currentRadioIcon.setAttribute("data-src", currentIconSrc);
-				loadSVGIconFor(currentRadioIcon);
+				const optionRadioMiddle = currentRadioIcon.querySelector("path.middle");
+				optionRadioMiddle.style.display = isCurrentChecked ? "block" : "none";
 			})
 		})
 
@@ -68,7 +72,7 @@ async function handleFetchPoll(uuid){
 
 handleFetchPoll('1');
 
-async function loadSVGIconFor(iconEl) {
+async function loadSVGIconFor(iconEl, callback = ()=>{}) {
 	const src = iconEl.getAttribute('data-src');
 	const response = await fetch(src);
 	const svgContent = await response.text();
@@ -79,6 +83,8 @@ async function loadSVGIconFor(iconEl) {
 	
 	iconEl.innerHTML = loadedSvg.outerHTML;
 	iconEl.setAttribute('viewBox', loadedSvg.getAttribute('viewBox'));
+
+	callback();
 }
 
 function loadSVGIcons() {
