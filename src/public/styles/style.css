@@ -63,12 +63,12 @@ body
 
 .poll > main > .poll-options > .option
 {
-	display: flex;
+	display: grid;
+	grid-template-columns: 3rem 1fr;
  	align-items: center;
 	border-radius: 8px;
 	position: relative;
 	overflow: hidden;
-	height: 1rem;
 	padding: 0.5rem 0;
 	background-color: #222;
 }
@@ -80,7 +80,7 @@ body
 
 .poll > main > .poll-options > .option > .option-percent
 {
-	position: absolute;
+	/* position: absolute; */
 	top: 0.5rem;
 	left: 1rem;
 	z-index: 1;
@@ -88,9 +88,7 @@ body
 
 .poll > main > .poll-options > .option > .option-content
 {
-	position: absolute;
-	top: 0.5rem;
-	left: 3.5rem;
+	justify-self: flex-start;
 	color: #ccc;
 	z-index: 1;
 }
@@ -143,5 +141,5 @@ button
 	border: none;
 	padding: 0.4rem;
 	border-radius: 6px;
-	width: 6rem;
+	min-width: 5rem;
 }

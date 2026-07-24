@@ -2,7 +2,7 @@ const pollTemplate = document.getElementById("poll-template");
 const pollContainer = document.getElementById("poll-container");
 
 function createPollOption(content) {
-	const optionEl = document.createElement("div");
+	const optionEl = document.createElement("button");
 	optionEl.classList.add("option");
 
 	const optionPercentEl = document.createElement("div");
