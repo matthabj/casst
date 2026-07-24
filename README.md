@@ -9,7 +9,32 @@ bun install
 To run:
 
 ```bash
-bun run src/index.ts
+npm run dev
 ```
+This project was created using `bun init` in bun v1.3.5.
 
-This project was created using `bun init` in bun v1.3.5. [Bun](https://bun.com) is a fast all-in-one JavaScript runtime.
+## Endpoints
+
+GET `/polls`
+
+GET `/polls/:uuid`
+
+POST `/polls/create`
+
+POST `/polls/:uuid/vote`
+
+
+## TODO
+
+- [ ] better radio buttons:
+  - [ ] grouping and highlighting
+  - [ ] options for multiple choices
+  - [ ] handeling realtime button adding
+  - [ ] working percent attribute
+- [ ] creating polls
+  - [ ] (*) poll admin view
+- [ ] voting on polls
+  - [ ] caching already voted users
+- [ ] JSON storing polls
+- [ ] Redis caching polls metadata
+- [ ] Realtime vote progress update (socket.io)

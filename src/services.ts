@@ -56,6 +56,10 @@ const polls: Poll[] = [
 	}
 ];
 
+const pollMetaKey = (pollId: string) => `poll:${pollId}`;
+const pollVotesKey = (pollId: string) => `poll:${pollId}:votes`;
+const pollVotersKey = (pollId: string) => `poll:${pollId}:voters`;
+
 export function handleGetPoll(req: Request, res: Response) {
 	const { uuid } = req.params;
 
