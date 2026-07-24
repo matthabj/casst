@@ -57,17 +57,16 @@ function createPoll(metadata) {
 	return poll;
 }
 
-const testPoll = {
-	title: "What is the best color?",
-	options: [
-		{id: 0, value: "Brown"},
-		{id: 1, value: "Sky"},
-		{id: 2, value: "Carrot"},
-	]
+async function handleFetchPoll(uuid){
+	const request = await fetch(`/polls/${uuid}`);
+	const result = await request.json();
+
+	if(result.status != 'ok') throw new Error(`Cannot get poll with uuid:${uuid}`);
+
+	pollContainer.appendChild(createPoll(result.data));
 }
 
-pollContainer.appendChild(createPoll(testPoll));
-
+handleFetchPoll('1');
 
 async function loadSVGIconFor(iconEl) {
 	const src = iconEl.getAttribute('data-src');
