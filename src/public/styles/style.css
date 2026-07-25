@@ -97,10 +97,10 @@ body
 {
 	position: absolute;
 	top: 0;
-	width: 60%;
+	width: 0%;
 	height: 100%;
-	border-radius: 8px;
-	background: none;
+	background: #343348;
+	transition: width ease 300ms;
 }
 
 .poll > main > .poll-options > .option > .radio-icon

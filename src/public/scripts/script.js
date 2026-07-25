@@ -9,6 +9,9 @@ function createPollOption(metadata) {
 	optionPercentEl.classList.add("option-percent");
 	optionPercentEl.innerText = "0%";
 
+	const optionPercentBarEl = document.createElement("div");
+	optionPercentBarEl.classList.add("option-bar");
+
 	const optionContentEl = document.createElement("div");
 	optionContentEl.classList.add("option-content");
 	optionContentEl.innerText = metadata.value;
@@ -24,6 +27,7 @@ function createPollOption(metadata) {
 	
 
 	optionEl.appendChild(optionPercentEl);
+	optionEl.appendChild(optionPercentBarEl);
 	optionEl.appendChild(optionContentEl);
 	optionEl.appendChild(optionRadioEl);
 
@@ -104,7 +108,7 @@ loadSVGIcons();
 
 class RadioGroup
 {
-	constructor(options, type="single") {
+	constructor(options) {
 		this.options = options;
 		this.init();
 	}
@@ -114,21 +118,25 @@ class RadioGroup
 			const optionEl = createPollOption(option);
 			option.element = optionEl;
 			
-			optionEl.addEventListener("click", this.handleRadioClick.bind(this, optionEl))
+			optionEl.addEventListener("click", this.handleRadioClick.bind(this, option))
 		});
 	}
 
 	updateRadioState(option) {
 		const radioMiddle = option.element.querySelector("path.middle");
 		radioMiddle.style.display = option.checked ? "block" : "none";
+
+		const radioBar = option.element.querySelector(".option-bar");
+		radioBar.style.width = `${option.percent}%`;
 	}
 
-	handleRadioClick(optionEl) {
+	handleRadioClick(option) {
 		for(let i = 0; i<this.options.length; i++) {
 			const currentOption = this.options[i];
-			const isChecked = (currentOption.element == optionEl);
+			const isChecked = (currentOption.id == option.id);
 
 			this.options[i].checked = isChecked;
+			this.options[i].percent = isChecked ? 100 : 0;
 			this.updateRadioState(this.options[i])
 		}
 	}
