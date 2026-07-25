@@ -27,7 +27,7 @@ POST `/polls/:uuid/vote`
 ## TODO
 
 - [ ] better radio buttons:
-  - [ ] grouping and highlighting
+  - [x] grouping and highlighting
   - [ ] options for multiple choices
   - [ ] handeling realtime button adding
   - [ ] working percent attribute

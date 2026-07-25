@@ -19,9 +19,9 @@ function createPollOption(metadata) {
 	const optionRadioEl = document.createElement("div");
 	optionRadioEl.classList.add("icon");
 	optionRadioEl.classList.add("radio-icon");
-	optionRadioEl.setAttribute("data-src", "assets/radio-checked.svg")
+	optionRadioEl.setAttribute("data-src", "assets/checkbox--checked.svg")
 	loadSVGIconFor(optionRadioEl, function afterRadioLoads() {
-		const optionRadioMiddle = optionRadioEl.querySelector("path.middle");
+		const optionRadioMiddle = optionRadioEl.querySelector(".radio-icon .middle");
 		optionRadioMiddle.style.display = "none";
 	});
 	
@@ -123,7 +123,7 @@ class RadioGroup
 	}
 
 	updateRadioState(option) {
-		const radioMiddle = option.element.querySelector("path.middle");
+		const radioMiddle = option.element.querySelector(".radio-icon .middle");
 		radioMiddle.style.display = option.checked ? "block" : "none";
 
 		const radioBar = option.element.querySelector(".option-bar");
