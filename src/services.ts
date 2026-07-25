@@ -51,7 +51,7 @@ const polls: Poll[] = [
 		votes: new Map<string, number>([
 			["1", 2],
 			["2", 1],
-			["4", 5]
+			["3", 5]
 		])
 	}
 ];

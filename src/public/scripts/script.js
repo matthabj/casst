@@ -1,7 +1,7 @@
 const pollTemplate = document.getElementById("poll-template");
 const pollContainer = document.getElementById("poll-container");
 
-function createPollOption(content) {
+function createPollOption(metadata) {
 	const optionEl = document.createElement("button");
 	optionEl.classList.add("option");
 
@@ -11,7 +11,7 @@ function createPollOption(content) {
 
 	const optionContentEl = document.createElement("div");
 	optionContentEl.classList.add("option-content");
-	optionContentEl.innerText = content;
+	optionContentEl.innerText = metadata.value;
 
 	const optionRadioEl = document.createElement("div");
 	optionRadioEl.classList.add("icon");
@@ -39,24 +39,30 @@ function createPoll(metadata) {
 	const titleEl = poll.querySelector(".poll-title");
 	titleEl.innerText = metadata.title;
 
-	const optionArray = [];
 	const optionsParentEl = poll.querySelector(".poll-options");
 	optionsParentEl.innerHTML = "";
-	metadata.options.forEach(option => {
-		const optionEl = createPollOption(option.value);
 
-		optionEl.addEventListener("click", function handleRadioSelect() {
-			optionArray.forEach(currentOption => {
-				const currentRadioIcon = currentOption.querySelector("div.radio-icon");
-				const isCurrentChecked = (currentOption == optionEl);
-				const optionRadioMiddle = currentRadioIcon.querySelector("path.middle");
-				optionRadioMiddle.style.display = isCurrentChecked ? "block" : "none";
-			})
-		})
+	const radioGroup = new RadioGroup(metadata.options);
 
-		optionArray.push(optionEl);
-		optionsParentEl.appendChild(optionEl);
-	});
+	radioGroup.options.forEach(option => {
+		optionsParentEl.appendChild(option.element);
+	})
+
+	// metadata.options.forEach(option => {
+	// 	const optionEl = createPollOption(option.value);
+
+	// 	optionEl.addEventListener("click", function handleRadioSelect() {
+	// 		optionArray.forEach(currentOption => {
+	// 			const currentRadioIcon = currentOption.querySelector("div.radio-icon");
+	// 			const isCurrentChecked = (currentOption == optionEl);
+	// 			const optionRadioMiddle = currentRadioIcon.querySelector("path.middle");
+	// 			optionRadioMiddle.style.display = isCurrentChecked ? "block" : "none";
+	// 		})
+	// 	})
+
+	// 	optionArray.push(optionEl);
+	// 	optionsParentEl.appendChild(optionEl);
+	// });
 
 	return poll;
 }
@@ -94,3 +100,36 @@ function loadSVGIcons() {
 }
 
 loadSVGIcons();
+
+
+class RadioGroup
+{
+	constructor(options, type="single") {
+		this.options = options;
+		this.init();
+	}
+
+	init() {
+		this.options.forEach(option => {
+			const optionEl = createPollOption(option);
+			option.element = optionEl;
+			
+			optionEl.addEventListener("click", this.handleRadioClick.bind(this, optionEl))
+		});
+	}
+
+	updateRadioState(option) {
+		const radioMiddle = option.element.querySelector("path.middle");
+		radioMiddle.style.display = option.checked ? "block" : "none";
+	}
+
+	handleRadioClick(optionEl) {
+		for(let i = 0; i<this.options.length; i++) {
+			const currentOption = this.options[i];
+			const isChecked = (currentOption.element == optionEl);
+
+			this.options[i].checked = isChecked;
+			this.updateRadioState(this.options[i])
+		}
+	}
+}
