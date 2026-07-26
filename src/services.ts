@@ -48,11 +48,11 @@ const polls: Poll[] = [
 			{id: "2", value: "B"},
 			{id: "3", value: "C"}
 		],
-		votes: new Map<string, number>([
+		votes: [
 			["1", 2],
 			["2", 1],
 			["3", 5]
-		])
+		]
 	}
 ];
 
@@ -60,8 +60,28 @@ const pollMetaKey = (pollId: string) => `poll:${pollId}`;
 const pollVotesKey = (pollId: string) => `poll:${pollId}:votes`;
 const pollVotersKey = (pollId: string) => `poll:${pollId}:voters`;
 
-export function handleGetPoll(req: Request, res: Response) {
-	const { uuid } = req.params;
 
-	res.send({ status: 'ok', data: polls[0]});
+export async function handleGetPoll(req: Request, res: Response) {
+	const { uuid } = req.params;
+	const client = await getRedisClient();
+
+	if(typeof uuid !== "string") {
+		console.error(`bad key`);
+		return;
+	}
+
+	const pollMetadataKey = pollMetaKey(uuid);
+	const pollMetadataString = await client.get(pollMetadataKey);
+
+	if(pollMetadataString != null) {
+		console.log(`Retuned cached "${pollMetadataKey}"`)
+		const data = JSON.parse(pollMetadataString);
+		res.send({ status: 'ok', data });
+		return;
+	}
+
+	const pollMetadata = polls[0];
+	await client.set(pollMetadataKey, JSON.stringify(pollMetadata));
+
+	res.send({ status: 'ok', data: pollMetadata });
 } 
