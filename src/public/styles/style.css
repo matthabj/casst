@@ -103,7 +103,7 @@ body
 	transition: width ease 300ms;
 }
 
-.poll > main > .poll-options > .option > .radio-icon
+.poll > main > .poll-options > .option > .radio-icon, .poll > main > .poll-options > .option > .radio-icon-active
 {
 	position: absolute;
 	width: 1.2rem;

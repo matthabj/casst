@@ -19,17 +19,20 @@ function createPollOption(metadata) {
 	const optionRadioEl = document.createElement("div");
 	optionRadioEl.classList.add("icon");
 	optionRadioEl.classList.add("radio-icon");
-	optionRadioEl.setAttribute("data-src", "assets/checkbox--checked.svg")
-	loadSVGIconFor(optionRadioEl, function afterRadioLoads() {
-		const optionRadioMiddle = optionRadioEl.querySelector(".radio-icon .middle");
-		optionRadioMiddle.style.display = "none";
-	});
-	
+	optionRadioEl.setAttribute("data-src", "assets/radio.svg")
+	loadSVGIconFor(optionRadioEl);
+
+	const optionRadioActiveEl = document.createElement("div");
+	optionRadioActiveEl.classList.add("icon");
+	optionRadioActiveEl.classList.add("radio-icon-active");
+	optionRadioActiveEl.setAttribute("data-src", "assets/radio-checked.svg")
+	loadSVGIconFor(optionRadioActiveEl);
 
 	optionEl.appendChild(optionPercentEl);
 	optionEl.appendChild(optionPercentBarEl);
 	optionEl.appendChild(optionContentEl);
 	optionEl.appendChild(optionRadioEl);
+	optionEl.appendChild(optionRadioActiveEl);
 
 	return optionEl;
 }
@@ -51,22 +54,6 @@ function createPoll(metadata) {
 	radioGroup.options.forEach(option => {
 		optionsParentEl.appendChild(option.element);
 	})
-
-	// metadata.options.forEach(option => {
-	// 	const optionEl = createPollOption(option.value);
-
-	// 	optionEl.addEventListener("click", function handleRadioSelect() {
-	// 		optionArray.forEach(currentOption => {
-	// 			const currentRadioIcon = currentOption.querySelector("div.radio-icon");
-	// 			const isCurrentChecked = (currentOption == optionEl);
-	// 			const optionRadioMiddle = currentRadioIcon.querySelector("path.middle");
-	// 			optionRadioMiddle.style.display = isCurrentChecked ? "block" : "none";
-	// 		})
-	// 	})
-
-	// 	optionArray.push(optionEl);
-	// 	optionsParentEl.appendChild(optionEl);
-	// });
 
 	return poll;
 }
@@ -119,12 +106,23 @@ class RadioGroup
 			option.element = optionEl;
 			
 			optionEl.addEventListener("click", this.handleRadioClick.bind(this, option))
+			this.updateRadioState(option);
 		});
 	}
 
 	updateRadioState(option) {
-		const radioMiddle = option.element.querySelector(".radio-icon .middle");
-		radioMiddle.style.display = option.checked ? "block" : "none";
+		const radioIcon = option.element.querySelector(".radio-icon");
+		const radioIconActive = option.element.querySelector(".radio-icon-active");
+
+		if(option.checked) {
+			radioIcon.style.display = "none";
+			radioIconActive.style.display = "block";
+		} 
+		else {
+			radioIcon.style.display = "block";
+			radioIconActive.style.display = "none";
+		}
+		
 
 		const radioBar = option.element.querySelector(".option-bar");
 		radioBar.style.width = `${option.percent}%`;
