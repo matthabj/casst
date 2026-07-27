@@ -1,4 +1,3 @@
-
 class RadioGroup
 {
 	constructor(options) {

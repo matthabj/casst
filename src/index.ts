@@ -22,6 +22,10 @@ app.get('/', (req: Request, res: Response) => {
 	res.sendFile("index.html");
 });
 
+app.get('/polls/:uuid', (req: Request, res: Response) => {
+	res.sendFile(path.join(__dirname, 'public', 'index.html'));
+});
+
 connectRedisInBackground();
 
 app.use(routes);

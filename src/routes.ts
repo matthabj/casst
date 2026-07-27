@@ -10,8 +10,8 @@ const router = Router();
 router.get('/get/:key', getKey);
 router.post('/store', storeKey);
 
-router.get('/polls/:uuid', handleGetPoll);
-// router.post('/polls/:uuid/vote', handlePollVote);
-// router.post('/polls/create', handleCreatePoll);
+router.get('/api/polls/:uuid', handleGetPoll);
+// router.post('/api/polls/:uuid/vote', handlePollVote);
+// router.post('/api/polls/create', handleCreatePoll);
 
 export const routes = router;

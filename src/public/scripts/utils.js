@@ -16,13 +16,13 @@ function createPollOption(metadata) {
 	const optionRadioEl = document.createElement("div");
 	optionRadioEl.classList.add("icon");
 	optionRadioEl.classList.add("radio-icon");
-	optionRadioEl.setAttribute("data-src", "assets/radio.svg")
+	optionRadioEl.setAttribute("data-src", "/assets/radio.svg")
 	loadSVGIconFor(optionRadioEl);
 
 	const optionRadioActiveEl = document.createElement("div");
 	optionRadioActiveEl.classList.add("icon");
 	optionRadioActiveEl.classList.add("radio-icon-active");
-	optionRadioActiveEl.setAttribute("data-src", "assets/radio-checked.svg")
+	optionRadioActiveEl.setAttribute("data-src", "/assets/radio-checked.svg")
 	loadSVGIconFor(optionRadioActiveEl);
 
 	optionEl.appendChild(optionPercentEl);

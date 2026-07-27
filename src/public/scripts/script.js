@@ -23,15 +23,13 @@ function createPoll(metadata) {
 }
 
 async function handleFetchPoll(uuid){
-	const request = await fetch(`/polls/${uuid}`);
+	const request = await fetch(`/api/polls/${uuid}`);
 	const result = await request.json();
 
 	if(result.status != 'ok') throw new Error(`Cannot get poll with uuid:${uuid}`);
 
 	pollContainer.appendChild(createPoll(result.data));
 }
-
-handleFetchPoll('1');
 
 async function loadSVGIconFor(iconEl, callback = ()=>{}) {
 	const src = iconEl.getAttribute('data-src');
@@ -55,3 +53,4 @@ function loadSVGIcons() {
 }
 
 loadSVGIcons();
+routerInit();
