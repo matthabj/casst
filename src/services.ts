@@ -1,5 +1,6 @@
 import { Request, Response } from "express";
 import { getRedisClient, isRedisReady } from './redis';
+import { getPollByUUID } from "./db";
 import { Poll } from './types';
 
 function responseError(res: Response, message: string) {
@@ -80,7 +81,13 @@ export async function handleGetPoll(req: Request, res: Response) {
 		return;
 	}
 
-	const pollMetadata = polls[0];
+	const pollMetadata = await getPollByUUID(uuid);
+
+	if(pollMetadata == null) {
+		console.error(`no poll with this uuid in db`);
+		return;
+	}
+
 	await client.set(pollMetadataKey, JSON.stringify(pollMetadata));
 
 	res.send({ status: 'ok', data: pollMetadata });
