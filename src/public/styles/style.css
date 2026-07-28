@@ -17,111 +17,6 @@ body
 	/* font-family: 'Rubik', sans-serif; */
 }
 
-.poll
-{
-	max-width: 30rem;
-	padding: 1rem;
-	background-color: #121212;
-	font-size: 0.9rem;
-
-	display: flex;
-	flex-direction: column;
-	gap: 1rem;
-
-	border-radius: 8px;
-}
-
-.poll > header
-{
-	display: flex;
-	gap: 0.5rem;
-	font-weight: bold;
-	align-items: center;
-}
-
-.poll > main
-{
-	padding: 0 1rem;
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-}
-
-.poll > main > span.poll-title
-{
-	font-size: 1.2rem;
-	font-weight: bold;
-	margin-bottom: 0.5rem;
-}
-
-.poll > main > .poll-options
-{
-	display: flex;
-	flex-direction: column;
-	gap: 0.5rem;
-}
-
-.poll > main > .poll-options > .option
-{
-	display: grid;
-	grid-template-columns: 3rem 1fr;
- 	align-items: center;
-	border-radius: 8px;
-	position: relative;
-	overflow: hidden;
-	padding: 0.5rem 0;
-	background-color: #222;
-}
-
-.poll > main > .poll-options > .option:hover
-{
-	background-color: #333;
-}
-
-.poll > main > .poll-options > .option > .option-percent
-{
-	/* position: absolute; */
-	top: 0.5rem;
-	left: 1rem;
-	z-index: 1;
-}
-
-.poll > main > .poll-options > .option > .option-content
-{
-	justify-self: flex-start;
-	color: #ccc;
-	z-index: 1;
-}
-
-.poll > main > .poll-options > .option > .option-bar
-{
-	position: absolute;
-	top: 0;
-	width: 0%;
-	height: 100%;
-	background: #333c48;
-	transition: width ease 300ms;
-}
-
-.poll > main > .poll-options > .option > .radio-icon, .poll > main > .poll-options > .option > .radio-icon-active
-{
-	position: absolute;
-	width: 1.2rem;
-	height: 1.2rem;
-	right: 0.6rem;
-}
-
-.poll > main > .meta-votes
-{
-	color: #aaa;
-}
-
-.poll > main > .footer
-{
-	display: flex;
-	margin-top: 0.5rem;
-}
-
 .icon
 {
 	width: 32px;
@@ -142,4 +37,9 @@ button
 	padding: 0.4rem;
 	border-radius: 6px;
 	min-width: 5rem;
+}
+
+button:hover
+{
+	background:rgb(83, 97, 201);
 }
