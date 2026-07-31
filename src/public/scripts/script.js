@@ -53,7 +53,7 @@ async function handleVote(uuid, optionId) {
 	console.log("ok");
 }
 
-async function loadSVGIconFor(iconEl, callback = ()=>{}) {
+async function loadSVGIconFor(iconEl, callback = (()=>{})) {
 	const src = iconEl.getAttribute('data-src');
 	const response = await fetch(src);
 	const svgContent = await response.text();

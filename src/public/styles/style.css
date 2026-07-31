@@ -20,7 +20,8 @@ body
 .pannel
 {
 	padding: 1rem;
-	width: 80%;
+	width: 70%;
+	max-width: 40rem;
 	border: 1px solid #666;
 }
 
@@ -66,10 +67,9 @@ button
 	min-width: 5rem;
 }
 
-button:hover
-{
-	background:rgb(83, 97, 201);
-}
+button:hover {background:rgb(83, 97, 201);}
+button.secondary {background: #2c2c2c;}
+button.secondary:hover {background:rgb(69, 69, 69);}
 
 input
 {
@@ -84,11 +84,33 @@ input
 {
 	display: flex;
 	flex-direction: column;
+	justify-content: center;
 	gap: 0.5rem;
+
+	position: relative;
 }
 
 .input-group .label
 {
 	font-size: 0.8rem;
 	color: #aaa;
+}
+
+.input-group .icon-right
+{
+	position: absolute;
+	right: 0.7rem;
+	width: 1.4rem;
+}
+
+.input-group .icon-right svg
+{
+	fill: #666;
+}
+
+.options-container
+{
+	display: flex;
+	flex-direction: column;
+	gap: 0.5rem;
 }

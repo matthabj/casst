@@ -18,27 +18,33 @@
 	<script src="/scripts/utils.js"></script>
 	<script defer src="/scripts/radiogroup.js"></script>
 	<script defer src="/scripts/router.js"></script>
+	<script defer src="/scripts/script.js"></script>
+	<script defer src="/scripts/view-index.js"></script>
 </head>
 <body>
-	<h1>Admin view</h1>
 	<div class="pannel" style="margin: auto;">
-		<form>
+		<form class="form-create-poll">
 			<header>
 				Create Poll
 			</header>
 			<main>
 				<div class="input-group">
-					<span class="label">Poll heading</span>
-					<input type="text" placeholder="Enter poll heading...">
+					<!-- <span class="label">Poll heading</span> -->
+					<input class="poll-title" type="text" placeholder="Enter poll heading...">
 				</div>
 				<div class="options-container">
 					<h3>Options</h3>
 					<div class="input-group">
-						<span class="label">Option #1</span>
-						<input type="text" placeholder="Enter option text...">
+						<input class="poll-option" type="text" placeholder="Enter option 1">
+						<div class="icon icon-right" data-src="assets/radio.svg"></div>
+					</div>
+					<div class="input-group">
+						<input class="poll-option" type="text" placeholder="Enter option 2">
+						<div class="icon icon-right" data-src="assets/radio.svg"></div>
 					</div>
 				</div>
-				<button>New option</button>
+				<button type="button" class="secondary">New option</button>
+				<button type="submit">Submit</button>
 			</main>
 		</form>
 	</div>
