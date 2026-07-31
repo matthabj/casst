@@ -14,12 +14,33 @@
 	<link href="https://fonts.cdnfonts.com/css/inclusive-sans-2" rel="stylesheet">
 	<link href="https://fonts.cdnfonts.com/css/rubik-2" rel="stylesheet">
 	<link rel="stylesheet" href="/styles/style.css">
-	<link rel="stylesheet" href="/styles/poll.css">
 
 	<script src="/scripts/utils.js"></script>
+	<script defer src="/scripts/radiogroup.js"></script>
 	<script defer src="/scripts/router.js"></script>
 </head>
 <body>
 	<h1>Admin view</h1>
+	<div class="pannel" style="margin: auto;">
+		<form>
+			<header>
+				Create Poll
+			</header>
+			<main>
+				<div class="input-group">
+					<span class="label">Poll heading</span>
+					<input type="text" placeholder="Enter poll heading...">
+				</div>
+				<div class="options-container">
+					<h3>Options</h3>
+					<div class="input-group">
+						<span class="label">Option #1</span>
+						<input type="text" placeholder="Enter option text...">
+					</div>
+				</div>
+				<button>New option</button>
+			</main>
+		</form>
+	</div>
 </body>
 </html>
