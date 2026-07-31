@@ -19,11 +19,11 @@ app.use(function(req, res, next) {
 });
 
 app.get('/', (req: Request, res: Response) => {
-	res.sendFile("index.html");
+	res.sendFile(path.join(__dirname, 'public/views', 'index.html'));
 });
 
 app.get('/polls/:uuid', (req: Request, res: Response) => {
-	res.sendFile(path.join(__dirname, 'public', 'index.html'));
+	res.sendFile(path.join(__dirname, 'public/views', 'poll.html'));
 });
 
 connectRedisInBackground();
