@@ -14,21 +14,43 @@ function createPoll(metadata) {
 	optionsParentEl.innerHTML = "";
 
 	const radioGroup = new RadioGroup(metadata.options);
-
 	radioGroup.options.forEach(option => {
 		optionsParentEl.appendChild(option.element);
 	})
 
+	const btnVote = poll.querySelector("button.vote");
+	btnVote.addEventListener("click", function handleButtonVote() {
+		console.log("casted vote");
+		handleVote("1", "1");
+	});
+
 	return poll;
 }
 
-async function handleFetchPoll(uuid){
+async function handleFetchPoll(uuid) {
 	const request = await fetch(`/api/polls/${uuid}`);
 	const result = await request.json();
 
 	if(result.status != 'ok') throw new Error(`Cannot get poll with uuid:${uuid}`);
 
 	pollContainer.appendChild(createPoll(result.data));
+}
+
+async function handleVote(uuid, optionId) {
+	const request = await fetch(`/api/polls/vote`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				uuid, optionId
+			})
+		}
+	);
+	const result = await request.json();
+	if(result.status != 'ok') throw new Error(`Cannot get poll with uuid:${uuid}`);
+
+	console.log("ok");
 }
 
 async function loadSVGIconFor(iconEl, callback = ()=>{}) {

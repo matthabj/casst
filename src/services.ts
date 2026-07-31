@@ -40,23 +40,6 @@ export async function storeKey(req: Request, res: Response) {
     res.json({ status: 'ok', data: {key, value} });
 }
 
-const polls: Poll[] = [
-	{
-		id: "1",
-		title: "What is my name?",
-		options: [
-			{id: "1", value: "A"},
-			{id: "2", value: "B"},
-			{id: "3", value: "C"}
-		],
-		votes: [
-			["1", 2],
-			["2", 1],
-			["3", 5]
-		]
-	}
-];
-
 const pollMetaKey = (pollId: string) => `poll:${pollId}`;
 const pollVotesKey = (pollId: string) => `poll:${pollId}:votes`;
 const pollVotersKey = (pollId: string) => `poll:${pollId}:voters`;
@@ -91,4 +74,25 @@ export async function handleGetPoll(req: Request, res: Response) {
 	await client.set(pollMetadataKey, JSON.stringify(pollMetadata));
 
 	res.send({ status: 'ok', data: pollMetadata });
-} 
+}
+
+export async function initalizePollVotesSet(poll: Poll) {
+	const votes: Record<string, number> = {};
+	poll.options.forEach(option => {votes[option.id] = 0;})
+
+	const votesKey = pollVotesKey(poll.uuid);
+	const client = await getRedisClient();
+	await client.hSet(votesKey, votes);
+
+	console.log(votesKey, votes);
+}
+
+export async function handlePollVote(req: Request, res: Response) {
+	const { uuid, optionId } = req.body;
+	const client = await getRedisClient();
+	
+	const votesKey = pollVotesKey(uuid);
+	const voteCount = await client.hIncrBy(votesKey, optionId, 1);
+	console.log(votesKey, voteCount);
+	res.send({ status: 'ok' })
+}

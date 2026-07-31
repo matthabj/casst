@@ -10,7 +10,7 @@ export interface Option {
 
 
 export interface Poll {
-  id: UUID;
+  uuid: UUID;
   title: string;
   options: Option[];
   votes?: VotesMapElement[];

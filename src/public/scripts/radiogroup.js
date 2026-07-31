@@ -33,7 +33,7 @@ class RadioGroup
 		radioBarEl.style.width = `${option.percent}%`;
 
 		const radioPercentEl = option.element.querySelector(".option-percent");
-		radioPercentEl.innerText = `${option.percent}%`;
+		// radioPercentEl.innerText = `${option.percent}%`;
 	}
 
 	handleRadioClick(option) {
